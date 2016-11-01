@@ -106,7 +106,7 @@
   	
   	private function getConfiguration() {
      $result = \KuntaAPI\Configuration::getDefaultConfiguration();
-  	 $result->setHost(\KuntaAPI\Core\Settings\CoreSettings::getValue("apiUrl"));
+  	 $result->setHost(\KuntaAPI\Core\CoreSettings::getValue("apiUrl"));
   	 return $result;
   	}
   	

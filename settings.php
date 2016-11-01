@@ -1,5 +1,5 @@
 <?php
-  namespace KuntaAPI\Core\Settings;
+  namespace KuntaAPI\Core;
   
   if (!defined('ABSPATH')) { 
     exit;
