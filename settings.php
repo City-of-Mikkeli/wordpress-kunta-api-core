@@ -5,36 +5,13 @@
     exit;
   }
   
+  require_once('core-setting.php');
+  
   define(KUNTA_API_CORE_SETTINGS, 'kunta_api_core');
   define(KUNTA_API_CORE_SETTINGS_GROUP, 'kunta_api_core');
   define(KUNTA_API_CORE_SETTINGS_PAGE, 'kunta_api_core_settings');
   define(KUNTA_API_CORE_SETTINGS_OPTION, 'kunta_api_core_settings');
   		
-  class CoreSetting {
-  	
-  	private $type;
-  	private $name;
-  	private $title;
-  	
-  	public function __construct($type, $name, $title) {
-  	  $this->type = $type;
-  	  $this->name = $name;
-  	  $this->title = $title;
-  	}
-  	
-  	public function getType() {
-  		return $this->type;
-  	}
-  	
-  	public function getName() {
-  		return $this->name;
-  	}
-  	
-  	public function getTitle() {
-  		return $this->title;
-  	}
-  }
-  
   class CoreSettings {
   	
   	public static function getSettings() {
