@@ -8,6 +8,7 @@
   define(KUNTA_API_CORE_SETTINGS, 'kunta_api_core');
   define(KUNTA_API_CORE_SETTINGS_GROUP, 'kunta_api_core');
   define(KUNTA_API_CORE_SETTINGS_PAGE, 'kunta_api_core_settings');
+  define(KUNTA_API_CORE_SETTINGS_OPTION, 'kunta_api_core_settings');
   		
   class CoreSetting {
   	
@@ -76,6 +77,15 @@
   		return null;
   	}
   	
+  	public static function getValue($name) {
+  	  $options = get_option(KUNTA_API_CORE_SETTINGS_OPTION);
+  	  if ($options) {
+        return $options[$name];
+  	  } 
+  	  
+  	  return null;
+  	}
+  	
   }
   
   class CoreSettingsUI {
@@ -104,10 +114,10 @@
     
     private function createFieldUI($name) {
       $setting = CoreSettings::getSetting($name);
-    	$options = get_option(KUNTA_API_CORE_SETTINGS_OPTION);
+    	
     	$settingType = $setting['type'];
     	$settingName = $setting['name'];
-    	$optionValue = $options[$settingName];
+    	$optionValue = CoreSettings::getValue($settingName);
     	
     	echo "<input id='$settingName' name='" . KUNTA_API_CORE_SETTINGS_OPTION . "[$settingName]' size='42' type='$settingType' value='$optionValue' />";
     }
