@@ -1,0 +1,10 @@
+.mceNonEditable {
+  opacity: 0.5;
+  cursor: default;
+  color: red;
+}
+
+.mceNonEditable:hover {
+  opacity: 0.75;
+  background: #fee;
+}

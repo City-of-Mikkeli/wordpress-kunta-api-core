@@ -40,6 +40,11 @@
   			  "type" => "text",
   				"name" => "businessName",
   				"title" => __('Organization Business Name', KUNTA_API_CORE_I18N_DOMAIN)
+  			), 
+  			array(
+  			  "type" => "text",
+  				"name" => "organizationId",
+  				"title" => __('Organization identifier', KUNTA_API_CORE_I18N_DOMAIN)
   			)
   		);
   	}
@@ -119,6 +124,10 @@
   	  $this->createFieldUI('businessName');
   	}
   	
+    public function organizationId() {
+  	  $this->createFieldUI('organizationId');
+  	}
+    
   	public function settingsPage() {
   	  if (!current_user_can('manage_options')) {
   		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
