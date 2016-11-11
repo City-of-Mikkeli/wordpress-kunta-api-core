@@ -20,6 +20,10 @@
     public static function getCurrentLanguage(){
       return qtranxf_getLanguage();
     }
+
+    public static function getEnabledLanguages(){
+      return qtranxf_getSortedLanguages();
+    }
     
     public static function mergeLocalizedArray($values) {
       $result = '';
