@@ -28,26 +28,37 @@
       }
       
       public function processPageContent($content) {
-        $dom = HtmlDomParser::str_get_html($content);
-        
-        foreach ($this->contentProcessors as $contentProccessor) {
-          $contentProccessor->process(\KuntaAPI\Core\QTranslateHelper::getCurrentLanguage(), $dom, 'view');
+        if ($GLOBALS['post']->post_type == 'page') {
+          $dom = HtmlDomParser::str_get_html($content);
+          if($dom) {
+            foreach ($this->contentProcessors as $contentProccessor) {
+              $contentProccessor->process(\KuntaAPI\Core\QTranslateHelper::getCurrentLanguage(), $dom, 'view');
+            }
+            
+            return $dom;
+          }
         }
-       
-        return $dom;
+        
+        return $content;
       }
       public function processPageEditContent($content) {
-        $localizedValues = \KuntaAPI\Core\QTranslateHelper::splitLocalizedString($content);
-        $processed = [];
-        foreach ($localizedValues as $lang => $localizedContent) {
-          $dom = HtmlDomParser::str_get_html($localizedContent);
-       
-          foreach ($this->contentProcessors as $contentProccessor) {
-            $contentProccessor->process($lang, $dom, 'edit');
+        if ($GLOBALS['post']->post_type == 'page') {
+          $localizedValues = \KuntaAPI\Core\QTranslateHelper::splitLocalizedString($content);
+          $processed = [];
+          foreach ($localizedValues as $lang => $localizedContent) {
+            $dom = HtmlDomParser::str_get_html($localizedContent);
+            if($dom) {
+              foreach ($this->contentProcessors as $contentProccessor) {
+                $contentProccessor->process($lang, $dom, 'edit');
+              }
+              $processed[$lang] = $dom;
+            } else {
+              $processed[$lang] = $localizedContent;
+            }
           }
-          $processed[$lang] = $dom;
+          return \KuntaAPI\Core\QTranslateHelper::mergeLocalizedArray($processed);
         }
-        return \KuntaAPI\Core\QTranslateHelper::mergeLocalizedArray($processed);
+        return $content;
       }
       
     }
